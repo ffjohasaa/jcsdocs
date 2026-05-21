@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Avslutning 7. trinn – Invitasjon</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: #f5f0e8;
+    font-family: 'Lato', sans-serif;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+  }
+
+  .invitation {
+    background: #fff;
+    max-width: 560px;
+    width: 100%;
+    border-radius: 4px;
+    overflow: hidden;
+    box-shadow: 0 8px 40px rgba(0,0,0,0.12);
+  }
+
+  .header {
+    background: #1a2e1a;
+    color: #f5f0e8;
+    padding: 48px 40px 40px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .header::before {
+    content: '';
+    position: absolute;
+    top: -40px; left: -40px; right: -40px;
+    height: 120px;
+    background: radial-gradient(ellipse at center, #2d5a2d 0%, transparent 70%);
+    opacity: 0.6;
+  }
+
+  .confetti-row {
+    font-size: 22px;
+    letter-spacing: 8px;
+    margin-bottom: 20px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .header h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 13px;
+    font-weight: 400;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    color: #a8c5a0;
+    margin-bottom: 12px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .header h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 42px;
+    font-weight: 700;
+    line-height: 1.1;
+    color: #f5f0e8;
+    position: relative;
+    z-index: 1;
+  }
+
+  .header .subtitle {
+    font-size: 13px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #a8c5a0;
+    margin-top: 12px;
+    font-weight: 300;
+    position: relative;
+    z-index: 1;
+  }
+
+  .divider {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 0 40px;
+    margin: 28px 0;
+  }
+  .divider::before, .divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: #e0d8cc;
+  }
+  .divider span { font-size: 18px; }
+
+  .body {
+    padding: 0 40px 40px;
+  }
+
+  .intro {
+    font-size: 15px;
+    line-height: 1.8;
+    color: #444;
+    text-align: center;
+    margin-bottom: 28px;
+  }
+
+  .intro em {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    color: #1a2e1a;
+    font-size: 17px;
+  }
+
+  .schedule {
+    background: #f5f0e8;
+    border-radius: 4px;
+    overflow: hidden;
+    margin-bottom: 24px;
+  }
+
+  .schedule-row {
+    display: flex;
+    align-items: stretch;
+    border-bottom: 1px solid #e8e0d4;
+  }
+  .schedule-row:last-child { border-bottom: none; }
+
+  .time-badge {
+    background: #1a2e1a;
+    color: #a8c5a0;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    padding: 16px 18px;
+    min-width: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .schedule-info {
+    padding: 14px 18px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .schedule-info strong {
+    font-size: 14px;
+    color: #1a2e1a;
+    font-weight: 700;
+    display: block;
+    margin-bottom: 2px;
+  }
+
+  .schedule-info span {
+    font-size: 12.5px;
+    color: #777;
+    font-weight: 300;
+  }
+
+  .party-box {
+    border: 2px solid #1a2e1a;
+    border-radius: 4px;
+    padding: 20px;
+    margin-bottom: 24px;
+    text-align: center;
+  }
+
+  .party-box h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    color: #1a2e1a;
+    margin-bottom: 6px;
+  }
+
+  .party-box p {
+    font-size: 13px;
+    color: #666;
+    line-height: 1.6;
+  }
+
+  .party-box .price-tag {
+    display: inline-block;
+    background: #1a2e1a;
+    color: #f5f0e8;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    padding: 6px 16px;
+    border-radius: 2px;
+    margin-top: 12px;
+  }
+
+  .menu-row {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    margin-bottom: 24px;
+    flex-wrap: wrap;
+  }
+
+  .menu-pill {
+    background: #f5f0e8;
+    border: 1px solid #d8cebc;
+    border-radius: 100px;
+    padding: 7px 16px;
+    font-size: 12.5px;
+    color: #555;
+  }
+
+  .rsvp-section {
+    background: #1a2e1a;
+    border-radius: 4px;
+    padding: 24px;
+    text-align: center;
+    color: #f5f0e8;
+  }
+
+  .rsvp-section h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    margin-bottom: 8px;
+  }
+
+  .rsvp-section p {
+    font-size: 13px;
+    color: #a8c5a0;
+    line-height: 1.7;
+    margin-bottom: 16px;
+  }
+
+  .rsvp-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .rsvp-form input {
+    padding: 11px 14px;
+    border: 1px solid #2d5a2d;
+    border-radius: 3px;
+    background: rgba(255,255,255,0.07);
+    color: #f5f0e8;
+    font-family: 'Lato', sans-serif;
+    font-size: 14px;
+    outline: none;
+    transition: border-color 0.2s;
+    width: 100%;
+  }
+  .rsvp-form input::placeholder { color: #6a9a6a; }
+  .rsvp-form input:focus { border-color: #a8c5a0; }
+
+  .rsvp-row {
+    display: flex;
+    gap: 10px;
+  }
+  .rsvp-row input { flex: 1; }
+
+  .submit-btn {
+    background: #a8c5a0;
+    color: #1a2e1a;
+    border: none;
+    padding: 13px;
+    border-radius: 3px;
+    font-family: 'Lato', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background 0.2s;
+    margin-top: 4px;
+    width: 100%;
+  }
+  .submit-btn:hover { background: #c0d8b8; }
+
+  .success-msg {
+    display: none;
+    background: #2d5a2d;
+    border-radius: 3px;
+    padding: 12px;
+    font-size: 13px;
+    color: #a8c5a0;
+    margin-top: 8px;
+    text-align: center;
+  }
+
+  .response-list {
+    margin-top: 20px;
+    text-align: left;
+    display: none;
+  }
+
+  .response-list h4 {
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #6a9a6a;
+    margin-bottom: 10px;
+    font-weight: 700;
+  }
+
+  .response-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 0;
+    border-bottom: 1px solid #2d5a2d;
+    font-size: 13px;
+  }
+  .response-item:last-child { border-bottom: none; }
+  .response-item .name { color: #f5f0e8; }
+  .response-item .count {
+    background: #2d5a2d;
+    color: #a8c5a0;
+    padding: 2px 10px;
+    border-radius: 100px;
+    font-size: 12px;
+    font-weight: 700;
+  }
+
+  .total-bar {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0 0;
+    font-size: 12px;
+    color: #a8c5a0;
+    font-weight: 700;
+    letter-spacing: 1px;
+  }
+</style>
+</head>
+<body>
+<div class="invitation">
+  <div class="header">
+    <div class="confetti-row">🎓 🌿 🎉</div>
+    <h1>Vi inviterer til</h1>
+    <h2>Avslutning<br>7. trinn</h2>
+    <div class="subtitle">Tirsdag 17. juni 2025</div>
+  </div>
+
+  <div class="divider"><span>🌿</span></div>
+
+  <div class="body">
+    <p class="intro">
+      Nå er den store dagen kommet – våre flotte elever avslutter
+      <em>7. trinn</em> og er klare for nye eventyr!<br><br>
+      Vi håper du og familien kan bli med på feiringen.
+    </p>
+
+    <div class="schedule">
+      <div class="schedule-row">
+        <div class="time-badge">17:30</div>
+        <div class="schedule-info">
+          <strong>Avslutningsseremoni på skolen</strong>
+          <span>Ca. 1 time · velkommen til å møte opp litt før</span>
+        </div>
+      </div>
+      <div class="schedule-row">
+        <div class="time-badge">~19:00</div>
+        <div class="schedule-info">
+          <strong>Avslutningsfest – The Bakery, Lilleakerbyen</strong>
+          <span>Vi samles etter seremonien, ca. 19:00</span>
+        </div>
+      </div>
+      <div class="schedule-row">
+        <div class="time-badge">20:30</div>
+        <div class="schedule-info">
+          <strong>Festen avsluttes</strong>
+          <span>Takk for en minneverdig kveld!</span>
+        </div>
+      </div>
+      <div class="schedule-row">
+        <div class="time-badge">20:30</div>
+        <div class="schedule-info">
+          <strong>Nachspiel for barna 🎉</strong>
+          <span>Hjemme hos Mia og Martin · Ombergveien 9 (sammen med b-klassen)</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="party-box">
+      <h3>The Bakery · Lilleakerbyen</h3>
+      <p>Vi serverer pizza 🍕 kaker 🍰 og brus 🥤 til alle store og små.</p>
+      <div class="price-tag">200 kr per person</div>
+      <p style="margin-top:14px; font-size:13px; color:#666; line-height:1.7;">Betal via Vipps til <strong style="color:#1a2e1a;">41 75 12 65</strong><br>Merk betalingen med barnets navn.</p>
+    </div>
+
+    <div class="menu-row">
+      <div class="menu-pill">🍕 Pizza</div>
+      <div class="menu-pill">🍰 Kaker</div>
+      <div class="menu-pill">🥤 Brus</div>
+    </div>
+
+    <div style="border-left: 3px solid #1a2e1a; padding: 14px 18px; margin-bottom: 24px; background: #f5f0e8; border-radius: 0 4px 4px 0;">
+      <p style="font-size: 13px; color: #1a2e1a; font-weight: 700; margin-bottom: 4px;">🎤 Vil du si noe eller bidra med noe?</p>
+      <p style="font-size: 13px; color: #666; line-height: 1.7;">Har du lyst til å holde en tale, lese et dikt, spille noe eller bidra på annen måte? Ta gjerne kontakt med oss på forhånd, så setter vi opp et lite program!</p>
+    </div>
+
+    <div class="rsvp-section">
+      <h3>Meld deg på her</h3>
+      <p>Fyll ut skjemaet nedenfor så vi vet at du kommer og kan bestille nok mat til alle!</p>
+      <p style="margin-top:10px; font-size:12px; color:#e8b84b; font-weight:700; letter-spacing:1px; text-transform:uppercase;">⏰ Påmeldingsfrist: 1. juni 2025</p>
+
+      <a href="https://forms.gle/TVZAGdjXbS2U2VoF8" target="_blank" class="submit-btn" style="display:block; text-decoration:none; margin-top:4px; padding:14px;">
+        ✓ Meld deg på her
+      </a>
+    </div>
+  </div>
+</div>
+</body>
+</html>
