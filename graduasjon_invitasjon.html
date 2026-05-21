@@ -153,49 +153,53 @@
     font-size: 13px;
     font-weight: 700;
     letter-spacing: 1px;
-    padding: 0;
-    width: 80px;
-    min-width: 80px;
-    max-width: 80px;
-    height: 60px;
-    min-height: 60px;
+    padding: 16px 8px;
+    width: 76px;
+    min-width: 76px;
+    max-width: 76px;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
     text-align: center;
+    align-self: stretch;
   }
 
   .schedule-info {
-    padding: 0 18px;
+    padding: 14px 16px;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    min-height: 60px;
+    flex: 1;
+    min-width: 0;
   }
 
-  @media (max-width: 480px) {
-    .body { padding: 0 20px 32px; }
-    .divider { padding: 0 20px; }
-    .schedule-row { flex-direction: row; align-items: center; }
+  /* Mobile */
+  @media (max-width: 520px) {
+    body { padding: 0; }
+    .invitation { border-radius: 0; box-shadow: none; }
+    .body { padding: 0 16px 28px; }
+    .divider { padding: 0 16px; }
+    .intro { font-size: 14px; }
     .time-badge {
-      width: 70px;
-      min-width: 70px;
-      max-width: 70px;
-      height: auto;
-      min-height: 56px;
       font-size: 12px;
-      padding: 12px 6px;
+      width: 64px;
+      min-width: 64px;
+      max-width: 64px;
+      padding: 14px 4px;
+      letter-spacing: 0;
     }
     .schedule-info {
-      padding: 12px 14px;
-      min-height: 56px;
+      padding: 12px 12px;
     }
     .schedule-info strong { font-size: 13px; }
     .schedule-info span { font-size: 11.5px; }
-    .header h2 { font-size: 32px; }
+    .header h2 { font-size: 34px; }
+    .header-text { padding: 24px 20px 28px; }
     .party-box { padding: 16px; }
+    .party-box h3 { font-size: 17px; }
     .rsvp-section { padding: 20px 16px; }
+    .menu-pill { font-size: 12px; padding: 6px 12px; }
   }
 
   .schedule-info strong {
