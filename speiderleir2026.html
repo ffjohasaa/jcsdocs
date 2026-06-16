@@ -312,6 +312,20 @@
   .split-box .sub { font-size: 0.72rem; color: var(--text-muted); margin-top: 4px; }
 
   /* NOTICE */
+  .deadline {
+    margin-top: 0.75rem;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--navy);
+  }
+  .deadline::before {
+    content: "📅";
+    font-size: 0.9rem;
+  }
+
   .notice {
     background: var(--blue-light);
     border-left: 3px solid var(--blue);
@@ -423,6 +437,7 @@
         </div>
 
         <div class="notice">Husk å skrive fullt navn og «Sjøspeiderleir 2026» i meldingsfeltet.</div>
+        <div class="deadline">Betalingsfrist: 27. juni 2026</div>
       </div>
     </div>
   </div>
@@ -490,6 +505,7 @@
         </div>
 
         <div class="notice">Husk å skrive fullt navn og «Sjøspeiderleir 2026» i meldingsfeltet.</div>
+        <div class="deadline">Betalingsfrist: 27. juni 2026</div>
       </div>
     </div>
   </div>
@@ -557,6 +573,7 @@
         </div>
 
         <div class="notice">Husk å skrive fullt navn og «Sjøspeiderleir 2026» i meldingsfeltet.</div>
+        <div class="deadline">Betalingsfrist: 27. juni 2026</div>
       </div>
     </div>
   </div>
