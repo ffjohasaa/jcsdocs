@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Betaling — Sjøspeiderleir 2026</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --navy: #0a2a4a;
+    --navy-mid: #1a4a7a;
+    --blue: #1e6fbf;
+    --blue-light: #e8f2fc;
+    --sand: #f5f0e8;
+    --sand-dark: #e8e0d0;
+    --text: #1a1a2e;
+    --text-muted: #5a6a7a;
+    --white: #ffffff;
+    --border: #d0dce8;
+    --yellow: #f0c040;
+    --success: #2a7a4a;
+    --success-bg: #e8f5ee;
+    --radius: 10px;
+    --radius-sm: 6px;
+  }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: var(--sand);
+    color: var(--text);
+    min-height: 100vh;
+    line-height: 1.5;
+  }
+
+  /* HEADER */
+  header {
+    background: var(--navy);
+    color: white;
+    padding: 2rem 1.5rem 1.75rem;
+    text-align: center;
+  }
+
+  .wave-divider {
+    display: block;
+    width: 100%;
+    height: 40px;
+    background: var(--navy);
+    clip-path: ellipse(55% 100% at 50% 0%);
+    margin-top: -1px;
+  }
+
+  .anchor-icon {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+    display: block;
+    letter-spacing: 0;
+  }
+
+  header h1 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    margin-bottom: 0.2rem;
+  }
+
+  header p {
+    font-size: 0.9rem;
+    opacity: 0.7;
+    margin-top: 0.25rem;
+  }
+
+  .wave {
+    display: block;
+    width: 100%;
+    overflow: hidden;
+    line-height: 0;
+    margin-top: -1px;
+  }
+  .wave svg { display: block; width: 100%; }
+
+  /* MAIN */
+  main {
+    max-width: 480px;
+    margin: 0 auto;
+    padding: 1.5rem 1rem 3rem;
+  }
+
+  /* TABS */
+  .tabs {
+    display: flex;
+    background: var(--sand-dark);
+    border-radius: var(--radius);
+    padding: 4px;
+    gap: 4px;
+    margin-bottom: 1.25rem;
+  }
+
+  .tab {
+    flex: 1;
+    padding: 8px 6px;
+    border: none;
+    border-radius: var(--radius-sm);
+    background: transparent;
+    color: var(--text-muted);
+    font-size: 0.8rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.15s, color 0.15s;
+    text-align: center;
+  }
+
+  .tab.active {
+    background: var(--white);
+    color: var(--navy);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  }
+
+  /* CARD */
+  .card {
+    background: var(--white);
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+    overflow: hidden;
+  }
+
+  .card-header {
+    background: var(--blue-light);
+    border-bottom: 1px solid var(--border);
+    padding: 1rem 1.25rem;
+  }
+
+  .card-header h2 {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--navy);
+  }
+
+  .card-header p {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    margin-top: 2px;
+  }
+
+  .card-body { padding: 1.25rem; }
+
+  /* FIELD ROWS */
+  .field { margin-bottom: 1rem; }
+  .field-label {
+    font-size: 0.72rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--text-muted);
+    margin-bottom: 4px;
+  }
+
+  .field-value {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--navy);
+    font-family: 'SF Mono', 'Fira Code', monospace;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .field-value.normal {
+    font-family: inherit;
+    font-size: 0.95rem;
+  }
+
+  .copy-btn {
+    font-size: 0.7rem;
+    padding: 3px 10px;
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    background: var(--sand);
+    color: var(--text-muted);
+    cursor: pointer;
+    font-family: inherit;
+    font-weight: 500;
+    transition: background 0.15s;
+    white-space: nowrap;
+  }
+  .copy-btn:hover { background: var(--sand-dark); }
+  .copy-btn.copied { background: var(--success-bg); color: var(--success); border-color: #a0d4b4; }
+
+  .divider { border: none; border-top: 1px solid var(--sand-dark); margin: 1rem 0; }
+
+  /* ARMADA */
+  .section-title {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--navy);
+    margin-bottom: 0.75rem;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .badge-opt {
+    font-size: 0.65rem;
+    background: var(--yellow);
+    color: var(--navy);
+    padding: 2px 7px;
+    border-radius: 20px;
+    font-weight: 600;
+  }
+
+  .dogn-control {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .dogn-btn {
+    width: 40px;
+    height: 40px;
+    border: 1.5px solid var(--border);
+    border-radius: 50%;
+    background: var(--white);
+    color: var(--navy);
+    font-size: 1.3rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.1s, border-color 0.1s;
+    font-weight: 400;
+    line-height: 1;
+  }
+  .dogn-btn:hover { background: var(--blue-light); border-color: var(--blue); }
+  .dogn-btn:disabled { opacity: 0.3; cursor: default; }
+
+  .dogn-display {
+    text-align: center;
+    min-width: 60px;
+  }
+  .dogn-display .num {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--navy);
+    line-height: 1;
+  }
+  .dogn-display .sub {
+    font-size: 0.72rem;
+    color: var(--text-muted);
+    margin-top: 2px;
+  }
+
+  /* BETALINGSMÅTE */
+  .toggle-group {
+    display: flex;
+    gap: 6px;
+    margin-bottom: 1rem;
+  }
+  .toggle-btn {
+    flex: 1;
+    padding: 8px;
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius-sm);
+    background: var(--white);
+    color: var(--text-muted);
+    font-size: 0.78rem;
+    font-weight: 500;
+    cursor: pointer;
+    font-family: inherit;
+    transition: all 0.15s;
+  }
+  .toggle-btn.active {
+    border-color: var(--blue);
+    background: var(--blue-light);
+    color: var(--blue);
+  }
+
+  /* BELØP */
+  .amount-single {
+    background: var(--navy);
+    border-radius: var(--radius-sm);
+    padding: 1rem 1.25rem;
+    color: white;
+  }
+  .amount-single .label { font-size: 0.75rem; opacity: 0.7; margin-bottom: 4px; }
+  .amount-single .total { font-size: 2rem; font-weight: 700; }
+  .amount-single .breakdown {
+    margin-top: 0.75rem;
+    border-top: 1px solid rgba(255,255,255,0.15);
+    padding-top: 0.75rem;
+    font-size: 0.82rem;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .amount-single .breakdown-row { display: flex; justify-content: space-between; opacity: 0.8; }
+  .amount-single .breakdown-row.highlight { opacity: 1; font-weight: 600; }
+
+  .amount-split { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .split-box {
+    background: var(--sand);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 0.85rem 1rem;
+  }
+  .split-box .num {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--navy);
+  }
+  .split-box .lbl { font-size: 0.7rem; color: var(--text-muted); margin-bottom: 4px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; }
+  .split-box .sub { font-size: 0.72rem; color: var(--text-muted); margin-top: 4px; }
+
+  /* NOTICE */
+  .notice {
+    background: var(--blue-light);
+    border-left: 3px solid var(--blue);
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    padding: 0.75rem 1rem;
+    font-size: 0.8rem;
+    color: var(--navy-mid);
+    margin-top: 1rem;
+    line-height: 1.5;
+  }
+
+  .pane { display: none; }
+  .pane.active { display: block; }
+
+  /* FOOTER */
+  footer {
+    text-align: center;
+    padding: 1rem;
+    font-size: 0.75rem;
+    color: var(--text-muted);
+  }
+
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+</head>
+<body>
+
+<header>
+  <span class="anchor-icon">⚓</span>
+  <h1>Sjøspeiderleir 2026</h1>
+  <p>2. Bestum sjøspeidergruppe · Betalingsinformasjon</p>
+</header>
+
+<div class="wave">
+  <svg viewBox="0 0 1200 40" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0,0 C300,40 900,40 1200,0 L1200,0 L0,0 Z" fill="#0a2a4a"/>
+  </svg>
+</div>
+
+<main>
+  <div class="tabs">
+    <button class="tab active" onclick="showTab('s',this)">Speider</button>
+    <button class="tab" onclick="showTab('lr',this)">Leder m/rabatt</button>
+    <button class="tab" onclick="showTab('lf',this)">Leder u/rabatt</button>
+  </div>
+
+  <!-- SPEIDER -->
+  <div class="pane active" id="pane-s">
+    <div class="card">
+      <div class="card-header">
+        <h2>Deltaker — speider</h2>
+        <p>Sjøspeiderleir 2026</p>
+      </div>
+      <div class="card-body">
+        <div class="field">
+          <div class="field-label">Kontonummer</div>
+          <div class="field-value">6080.05.21168 <button class="copy-btn" onclick="copyText('608005211168',this)">Kopier</button></div>
+        </div>
+        <div class="field">
+          <div class="field-label">Melding</div>
+          <div class="field-value normal">Fullt navn + «Sjøspeiderleir 2026»</div>
+        </div>
+
+        <hr class="divider">
+
+        <div class="section-title">
+          Armada <span class="badge-opt">valgfritt</span>
+        </div>
+        <div class="dogn-control">
+          <button class="dogn-btn" onclick="changeDogn('s',-1)" id="minus-s">−</button>
+          <div class="dogn-display">
+            <div class="num" id="num-s">0</div>
+            <div class="sub">døgn × 300 kr</div>
+          </div>
+          <button class="dogn-btn" onclick="changeDogn('s',1)" id="plus-s">+</button>
+        </div>
+
+        <hr class="divider">
+
+        <div class="section-title">Betalingsmåte</div>
+        <div class="toggle-group">
+          <button class="toggle-btn active" id="tog-s-sam" onclick="setMode('s','sam')">Én samlet overføring</button>
+          <button class="toggle-btn" id="tog-s-sep" onclick="setMode('s','sep')">To separate</button>
+        </div>
+
+        <div id="box-s-sam">
+          <div class="amount-single">
+            <div class="label">Totalt å betale</div>
+            <div class="total" id="total-s">3 700 kr</div>
+            <div class="breakdown">
+              <div class="breakdown-row"><span>Leir</span><span>3 700 kr</span></div>
+              <div class="breakdown-row" id="arow-s" style="display:none"><span>Armada (<span id="adogn-s">0</span> døgn)</span><span id="aval-s">0 kr</span></div>
+            </div>
+          </div>
+        </div>
+        <div id="box-s-sep" style="display:none">
+          <div class="amount-split">
+            <div class="split-box">
+              <div class="lbl">Overføring 1</div>
+              <div class="num">3 700 kr</div>
+              <div class="sub">Leir · Navn + «Sjøspeiderleir 2026»</div>
+            </div>
+            <div class="split-box">
+              <div class="lbl">Overføring 2</div>
+              <div class="num" id="asep-s">—</div>
+              <div class="sub" id="asep-s-sub">Velg antall døgn over</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="notice">Husk å skrive fullt navn og «Sjøspeiderleir 2026» i meldingsfeltet.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- LEDER MED RABATT -->
+  <div class="pane" id="pane-lr">
+    <div class="card">
+      <div class="card-header">
+        <h2>Leder med rabatt</h2>
+        <p>Sjøspeiderleir 2026 · 1 per 5 speidere</p>
+      </div>
+      <div class="card-body">
+        <div class="field">
+          <div class="field-label">Kontonummer</div>
+          <div class="field-value">6080.05.21168 <button class="copy-btn" onclick="copyText('608005211168',this)">Kopier</button></div>
+        </div>
+        <div class="field">
+          <div class="field-label">Melding</div>
+          <div class="field-value normal">Fullt navn + «Sjøspeiderleir 2026»</div>
+        </div>
+
+        <hr class="divider">
+
+        <div class="section-title">Armada <span class="badge-opt">valgfritt</span></div>
+        <div class="dogn-control">
+          <button class="dogn-btn" onclick="changeDogn('lr',-1)" id="minus-lr">−</button>
+          <div class="dogn-display">
+            <div class="num" id="num-lr">0</div>
+            <div class="sub">døgn × 300 kr</div>
+          </div>
+          <button class="dogn-btn" onclick="changeDogn('lr',1)" id="plus-lr">+</button>
+        </div>
+
+        <hr class="divider">
+
+        <div class="section-title">Betalingsmåte</div>
+        <div class="toggle-group">
+          <button class="toggle-btn active" id="tog-lr-sam" onclick="setMode('lr','sam')">Én samlet overføring</button>
+          <button class="toggle-btn" id="tog-lr-sep" onclick="setMode('lr','sep')">To separate</button>
+        </div>
+
+        <div id="box-lr-sam">
+          <div class="amount-single">
+            <div class="label">Totalt å betale</div>
+            <div class="total" id="total-lr">2 650 kr</div>
+            <div class="breakdown">
+              <div class="breakdown-row"><span>Leir</span><span>2 650 kr</span></div>
+              <div class="breakdown-row" id="arow-lr" style="display:none"><span>Armada (<span id="adogn-lr">0</span> døgn)</span><span id="aval-lr">0 kr</span></div>
+            </div>
+          </div>
+        </div>
+        <div id="box-lr-sep" style="display:none">
+          <div class="amount-split">
+            <div class="split-box">
+              <div class="lbl">Overføring 1</div>
+              <div class="num">2 650 kr</div>
+              <div class="sub">Leir · Navn + «Sjøspeiderleir 2026»</div>
+            </div>
+            <div class="split-box">
+              <div class="lbl">Overføring 2</div>
+              <div class="num" id="asep-lr">—</div>
+              <div class="sub" id="asep-lr-sub">Velg antall døgn over</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="notice">Husk å skrive fullt navn og «Sjøspeiderleir 2026» i meldingsfeltet.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- LEDER UTEN RABATT -->
+  <div class="pane" id="pane-lf">
+    <div class="card">
+      <div class="card-header">
+        <h2>Leder uten rabatt</h2>
+        <p>Sjøspeiderleir 2026</p>
+      </div>
+      <div class="card-body">
+        <div class="field">
+          <div class="field-label">Kontonummer</div>
+          <div class="field-value">6080.05.21168 <button class="copy-btn" onclick="copyText('608005211168',this)">Kopier</button></div>
+        </div>
+        <div class="field">
+          <div class="field-label">Melding</div>
+          <div class="field-value normal">Fullt navn + «Sjøspeiderleir 2026»</div>
+        </div>
+
+        <hr class="divider">
+
+        <div class="section-title">Armada <span class="badge-opt">valgfritt</span></div>
+        <div class="dogn-control">
+          <button class="dogn-btn" onclick="changeDogn('lf',-1)" id="minus-lf">−</button>
+          <div class="dogn-display">
+            <div class="num" id="num-lf">0</div>
+            <div class="sub">døgn × 300 kr</div>
+          </div>
+          <button class="dogn-btn" onclick="changeDogn('lf',1)" id="plus-lf">+</button>
+        </div>
+
+        <hr class="divider">
+
+        <div class="section-title">Betalingsmåte</div>
+        <div class="toggle-group">
+          <button class="toggle-btn active" id="tog-lf-sam" onclick="setMode('lf','sam')">Én samlet overføring</button>
+          <button class="toggle-btn" id="tog-lf-sep" onclick="setMode('lf','sep')">To separate</button>
+        </div>
+
+        <div id="box-lf-sam">
+          <div class="amount-single">
+            <div class="label">Totalt å betale</div>
+            <div class="total" id="total-lf">3 700 kr</div>
+            <div class="breakdown">
+              <div class="breakdown-row"><span>Leir</span><span>3 700 kr</span></div>
+              <div class="breakdown-row" id="arow-lf" style="display:none"><span>Armada (<span id="adogn-lf">0</span> døgn)</span><span id="aval-lf">0 kr</span></div>
+            </div>
+          </div>
+        </div>
+        <div id="box-lf-sep" style="display:none">
+          <div class="amount-split">
+            <div class="split-box">
+              <div class="lbl">Overføring 1</div>
+              <div class="num">3 700 kr</div>
+              <div class="sub">Leir · Navn + «Sjøspeiderleir 2026»</div>
+            </div>
+            <div class="split-box">
+              <div class="lbl">Overføring 2</div>
+              <div class="num" id="asep-lf">—</div>
+              <div class="sub" id="asep-lf-sub">Velg antall døgn over</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="notice">Husk å skrive fullt navn og «Sjøspeiderleir 2026» i meldingsfeltet.</div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer>2. Bestum sjøspeidergruppe · Sjøspeiderleir 2026</footer>
+
+<script>
+const BASE = { s: 3700, lr: 2650, lf: 3700 };
+const dogn = { s: 0, lr: 0, lf: 0 };
+const modeState = { s: 'sam', lr: 'sam', lf: 'sam' };
+
+function fmt(n) {
+  return n.toLocaleString('no-NO') + ' kr';
+}
+
+function update(id) {
+  const d = dogn[id];
+  const arm = d * 300;
+  const tot = BASE[id] + arm;
+
+  document.getElementById('num-' + id).textContent = d;
+  document.getElementById('minus-' + id).disabled = d === 0;
+  document.getElementById('plus-' + id).disabled = d === 3;
+
+  document.getElementById('total-' + id).textContent = fmt(tot);
+
+  const arow = document.getElementById('arow-' + id);
+  if (arow) arow.style.display = d > 0 ? 'flex' : 'none';
+
+  const adogn = document.getElementById('adogn-' + id);
+  if (adogn) adogn.textContent = d;
+
+  const aval = document.getElementById('aval-' + id);
+  if (aval) aval.textContent = fmt(arm);
+
+  const asep = document.getElementById('asep-' + id);
+  if (asep) asep.textContent = d > 0 ? fmt(arm) : '—';
+
+  const asepsub = document.getElementById('asep-' + id + '-sub');
+  if (asepsub) asepsub.textContent = d > 0 ? 'Armada · Navn + «Armada 2026»' : 'Velg antall døgn over';
+}
+
+function changeDogn(id, delta) {
+  dogn[id] = Math.max(0, Math.min(3, dogn[id] + delta));
+  update(id);
+}
+
+function setMode(id, val) {
+  modeState[id] = val;
+  ['sam','sep'].forEach(m => {
+    document.getElementById('tog-' + id + '-' + m).classList.toggle('active', m === val);
+    document.getElementById('box-' + id + '-' + m).style.display = m === val ? 'block' : 'none';
+  });
+}
+
+function showTab(id, el) {
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.pane').forEach(p => p.classList.remove('active'));
+  el.classList.add('active');
+  document.getElementById('pane-' + id).classList.add('active');
+}
+
+function copyText(text, btn) {
+  navigator.clipboard.writeText(text).then(() => {
+    btn.textContent = 'Kopiert!';
+    btn.classList.add('copied');
+    setTimeout(() => { btn.textContent = 'Kopier'; btn.classList.remove('copied'); }, 1800);
+  }).catch(() => {
+    btn.textContent = 'Kopier manuelt';
+    setTimeout(() => { btn.textContent = 'Kopier'; }, 2000);
+  });
+}
+</script>
+</body>
+</html>
